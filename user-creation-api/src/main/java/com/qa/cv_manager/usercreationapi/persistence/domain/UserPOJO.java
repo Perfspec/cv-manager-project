@@ -1,6 +1,7 @@
 package com.qa.cv_manager.usercreationapi.persistence.domain;
 
 import com.qa.cv_manager.usercreationapi.validation.PasswordMatches;
+import com.qa.cv_manager.usercreationapi.validation.ValidEmail;
 import com.qa.cv_manager.usercreationapi.validation.ValidPassword;
 
 @PasswordMatches
@@ -17,14 +18,18 @@ public class UserPOJO {
 	
 	private String role;
 	
+	@ValidEmail
+	private String email;
+	
 	public UserPOJO() {}
 	
-	public UserPOJO(String username, String password, String confirmPassword, boolean enabled, String role) {
+	public UserPOJO(String username, String password, String confirmPassword, boolean enabled, String role, String email) {
 		this.username = username;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 		this.enabled = enabled;
 		this.role = role;
+		this.email = email;
 	}
 	
 	public String getConfirmPassword() {
@@ -64,5 +69,13 @@ public class UserPOJO {
 	
 	public String toString() {
 		return username + enabled + role;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

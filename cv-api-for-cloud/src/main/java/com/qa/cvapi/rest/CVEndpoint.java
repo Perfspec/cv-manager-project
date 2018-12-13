@@ -23,53 +23,59 @@ public class CVEndpoint {
 	@Autowired
 	private CVService cvService;
 
-	//Get All CVs
+	// Get All CVs
 	@GetMapping(path = Constants.CV_GET_ALL_EP)
 	public @ResponseBody Iterable<CV> getAllCVs() {
 		return cvService.getAllCVs();
 	}
 
-	//Get a CV
+	// Get a CV
 	@GetMapping(path = Constants.CV_GET_CV_EP)
 	public Optional<CV> getCV(@PathVariable int id) {
 		return cvService.getCV(id);
 	}
 
-	//Delete a CV
+	// Get CVs
+	@GetMapping(path = Constants.CV_GET_CVS_EP)
+	public @ResponseBody Iterable<CV> getCVs(@RequestBody Iterable<Integer> ids) {
+		return cvService.getAllCVs();
+	}
+
+	// Delete a CV
 	@DeleteMapping(path = Constants.CV_DELETE_EP)
-	public String deleteCV(@PathVariable int id) {
+	public @ResponseBody String deleteCV(@PathVariable int id) {
 		cvService.deleteCV(id);
 		return Constants.CV_DELETED;
 	}
 
-	//Update a CV
+	// Update a CV
 	@PutMapping(path = Constants.CV_UPDATE_EP)
-	public String updateCV(@PathVariable int id, @RequestBody CV cv) {
+	public @ResponseBody String updateCV(@PathVariable int id, @RequestBody CV cv) {
 		cvService.updateCV(id, cv);
 		return Constants.CV_UPDATED;
 	}
 
-	//Get all Flagged CVs
+	// Get all Flagged CVs
 	@GetMapping(path = Constants.CV_ALL_FLAGGED_EP)
 	public @ResponseBody Iterable<CV> getAllFlagged() {
 		return cvService.getAllFlagged();
 	}
 
-	//Get all Medium Flagged CVs
+	// Get all Medium Flagged CVs
 	@GetMapping(path = Constants.CV_MEDIUM_FLAGGED_EP)
 	public @ResponseBody Iterable<CV> getAllMediumFlagged() {
 		return cvService.getMediumFlagged();
 	}
 
-	//Get all Bad Flagged CVs
+	// Get all Bad Flagged CVs
 	@GetMapping(path = Constants.CV_BAD_FLAGGED_EP)
 	public @ResponseBody Iterable<CV> getAllBadFlagged() {
 		return cvService.getBadFlagged();
 	}
 
-	//Flag/Unflag a CV
+	// Flag/Unflag a CV
 	@PutMapping(path = Constants.CV_UPDATE_FLAG)
-	public String updateFlag(@PathVariable int id, @PathVariable int flag) {
+	public @ResponseBody String updateFlag(@PathVariable int id, @PathVariable int flag) {
 		cvService.updateFlag(id, flag);
 		return Constants.CV_FLAGGED;
 	}

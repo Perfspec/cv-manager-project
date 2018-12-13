@@ -25,13 +25,18 @@ public class User {
 	@JoinColumn(name = "username")
 	private UserRole role;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "username")
+	private UserEmail email;
+	
 	public User() {}
 	
-	public User(String username, String password, boolean enabled, UserRole role) {
+	public User(String username, String password, boolean enabled, UserRole role, UserEmail email) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.role = role;
+		this.email = email;
 	}
 	
 	public String getPassword() {
@@ -63,6 +68,14 @@ public class User {
 		this.role = role;
 	}
 	
+	public UserEmail getEmail() {
+		return email;
+	}
+
+	public void setEmail(UserEmail email) {
+		this.email = email;
+	}
+
 	public String toString() {
 		return username + enabled + role.toString();
 	}

@@ -17,6 +17,8 @@ public interface ICVService {
 	public String deleteCV(int id);
 
 	public Optional<CV> getCV(int id);
+	
+	public Iterable <CV> getCVs(Iterable<Integer> ids);
 
 	// Flag methods
 

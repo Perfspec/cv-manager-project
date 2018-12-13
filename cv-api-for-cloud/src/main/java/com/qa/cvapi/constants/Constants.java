@@ -1,10 +1,12 @@
 package com.qa.cvapi.constants;
+
 public class Constants {
 
 	// CV Endpoints
 		public static final String CV_PATH_EP = "/cv";
 		public static final String CV_GET_ALL_EP = "/getAll";
 		public static final String CV_GET_CV_EP = "/getCV/{id}";
+		public static final String CV_GET_CVS_EP = "/getCVs";
 		public static final String CV_DELETE_EP = "/deleteCV/{id}";
 		public static final String CV_UPDATE_EP = "/updateCV/{id}";
 
@@ -41,6 +43,5 @@ public class Constants {
 		public static final String DEFAULT_FILE = "failed-upload.txt";
 
 		// Test strings
-		public static final String TEST_PATH = "Test Path";
-
+		public static final String TEST_PATH = "Test Path";		
 }

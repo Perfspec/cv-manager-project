@@ -14,7 +14,7 @@ public class UserCreationApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UserCreationApiApplication.class, args);
 	}
-
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

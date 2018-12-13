@@ -12,4 +12,7 @@ public interface UserService {
 
 	ResponseEntity<Object> deleteUser(String username);
 
+	ResponseEntity<Object> disableAccount(String username);
+
+	ResponseEntity<Object> enableAccount(String username);
 }

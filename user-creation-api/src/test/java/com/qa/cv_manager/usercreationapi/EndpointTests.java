@@ -42,4 +42,18 @@ public class EndpointTests {
 		assertEquals(Constants.RESPONSE_OK, rest.deleteUser(Constants.MOCK_USERNAME));
 		Mockito.verify(service).deleteUser(Constants.MOCK_USERNAME);
 	}
+	
+	@Test
+	public void enableAccountTest() {
+		Mockito.when(service.enableAccount(Constants.MOCK_USERNAME)).thenReturn(Constants.RESPONSE_OK);
+		assertEquals(Constants.RESPONSE_OK, rest.enableAccount(Constants.MOCK_USERNAME));
+		Mockito.verify(service).enableAccount(Constants.MOCK_USERNAME);
+	}
+	
+	@Test
+	public void disableAccountTest() {
+		Mockito.when(service.disableAccount(Constants.MOCK_USERNAME)).thenReturn(Constants.RESPONSE_OK);
+		assertEquals(Constants.RESPONSE_OK, rest.disableAccount(Constants.MOCK_USERNAME));
+		Mockito.verify(service).disableAccount(Constants.MOCK_USERNAME);
+	}
 }

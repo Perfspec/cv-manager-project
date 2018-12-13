@@ -3,6 +3,8 @@ package com.qa.cvapi.service;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -60,5 +62,10 @@ public class ServiceTest {
 
 		assertEquals(expected, service.deleteCV(1));
 	}
-
+	
+	@Test
+	public void testGetCV() {
+		Mockito.when(service.getCV(cv.getId())).thenReturn(Optional.of(cv));
+		assertEquals(Optional.of(cv), service.getCV(cv.getId()));
+	}
 }
