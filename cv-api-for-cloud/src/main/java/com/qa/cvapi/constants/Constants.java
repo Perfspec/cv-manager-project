@@ -38,6 +38,7 @@ public class Constants {
 		// Storage Location
 		public static final String STORAGE_PATH = "storage";
 		public static final String STORAGE_DIR = "upload-dir";
+		public static final String DEFAULT_FILE = "failed-upload.txt";
 
 		// Test strings
 		public static final String TEST_PATH = "Test Path";

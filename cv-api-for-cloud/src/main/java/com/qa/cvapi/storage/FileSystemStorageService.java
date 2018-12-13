@@ -33,21 +33,24 @@ public class FileSystemStorageService implements StorageService {
 		String filename = StringUtils.cleanPath(file.getOriginalFilename());
 
 		try {
-			if (file.isEmpty()) {
-				throw new StorageException(Constants.STORAGE_FAIL_EMPTY + filename);
-			}
-			if (filename.contains("..")) {
-				// This is a security check
-				throw new StorageException(
-						Constants.STORAGE_PATH_FAIL + filename);
-			}
+			checkFileType(file, filename);
 			try (InputStream inputStream = file.getInputStream()) {
 				Files.copy(inputStream, this.rootLocation.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
 			}
 		} catch (IOException e) {
 			throw new StorageException(Constants.STORAGE_FILE_FAIL + filename, e);
 		}
-
+	}
+	
+	private void checkFileType(MultipartFile file, String filename) throws StorageException {
+		if (file.isEmpty()) {
+			throw new StorageException(Constants.STORAGE_FAIL_EMPTY + filename);
+		}
+		if (filename.contains("..")) {
+			// This is a security check
+			throw new StorageException(
+					Constants.STORAGE_PATH_FAIL + filename);
+		}
 	}
 
 	@Override
@@ -73,8 +76,8 @@ public class FileSystemStorageService implements StorageService {
 			if (resource.exists() || resource.isReadable()) {
 				return resource;
 			} else {
-				throw new StorageFileNotFoundException(Constants.STORAGE_COULD_NOT_READ + filename);
-
+				Path file2 = load(Constants.DEFAULT_FILE);
+				return new UrlResource(file2.toUri());
 			}
 		} catch (MalformedURLException e) {
 			throw new StorageFileNotFoundException(Constants.STORAGE_COULD_NOT_READ + filename, e);

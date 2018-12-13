@@ -2,6 +2,7 @@ package com.qa.cvapi.service;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -71,35 +72,27 @@ public class CVService implements ICVService {
 
 	// Get all Flagged CVs
 	public Iterable<CV> getAllFlagged() {
-		Iterable<CV> flaggedList = new ArrayList<CV>();
-		Iterable<CV> cvList = cvRepo.findAll();
-
-		flaggedList = StreamSupport.stream(cvList.spliterator(), false).filter(cv -> cv.getFlag() > 0)
-				.collect(Collectors.toList());
-
-		return flaggedList;
+		return getListBy(cv -> cv.getFlag() > 0);
 	}
 
 	// Get all Medium Flagged CVs
 	public Iterable<CV> getMediumFlagged() {
-		Iterable<CV> flaggedList = new ArrayList<CV>();
-		Iterable<CV> cvList = cvRepo.findAll();
-
-		flaggedList = StreamSupport.stream(cvList.spliterator(), false).filter(cv -> cv.getFlag() == 1)
-				.collect(Collectors.toList());
-
-		return flaggedList;
+		return getListBy(cv -> cv.getFlag() == 1);
 	}
 
 	// Get all Bad Flagged CVs
 	public Iterable<CV> getBadFlagged() {
-		Iterable<CV> flaggedList = new ArrayList<CV>();
+		return getListBy(cv -> cv.getFlag() == 2);
+	}
+	
+	public Iterable<CV> getListBy(Predicate<CV> filterPredicate) {
+		Iterable<CV> filteredList = new ArrayList<CV>();
 		Iterable<CV> cvList = cvRepo.findAll();
 
-		flaggedList = StreamSupport.stream(cvList.spliterator(), false).filter(cv -> cv.getFlag() == 2)
+		filteredList = StreamSupport.stream(cvList.spliterator(), false).filter(filterPredicate)
 				.collect(Collectors.toList());
 
-		return flaggedList;
+		return filteredList;
 	}
 
 }
