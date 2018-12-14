@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
 	public ResponseEntity<Object> addUser(UserPOJO user) {
 		if(userExistsInDatabase(user.getUsername())) {
-			return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 		
 		User storedUser = createUserEntityFromPOJO(user);
