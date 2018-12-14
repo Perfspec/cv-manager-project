@@ -1,11 +1,11 @@
-package com.qa.cv_manager.usercreationapi.validation;
+package com.qa.cv_manager.usercreationapi.util.validation;
 
 import java.util.regex.Pattern;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.qa.cv_manager.usercreationapi.constants.Constants;
+import com.qa.cv_manager.usercreationapi.util.constants.Constants;
 
 public class ValidEmailValidator implements ConstraintValidator<ValidEmail, String> {
 

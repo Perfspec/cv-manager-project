@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.qa.cv_manager.usercreationapi.constants.Constants;
 import com.qa.cv_manager.usercreationapi.rest.UserRest;
+import com.qa.cv_manager.usercreationapi.util.constants.Constants;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

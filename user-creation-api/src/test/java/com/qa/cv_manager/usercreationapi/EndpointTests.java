@@ -9,9 +9,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.qa.cv_manager.usercreationapi.constants.Constants;
 import com.qa.cv_manager.usercreationapi.rest.UserRest;
 import com.qa.cv_manager.usercreationapi.service.UserServiceImpl;
+import com.qa.cv_manager.usercreationapi.util.constants.Constants;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EndpointTests {

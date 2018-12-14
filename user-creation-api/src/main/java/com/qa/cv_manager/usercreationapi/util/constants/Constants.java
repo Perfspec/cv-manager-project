@@ -1,4 +1,4 @@
-package com.qa.cv_manager.usercreationapi.constants;
+package com.qa.cv_manager.usercreationapi.util.constants;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
