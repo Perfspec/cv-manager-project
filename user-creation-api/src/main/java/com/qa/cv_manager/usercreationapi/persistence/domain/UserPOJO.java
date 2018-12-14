@@ -1,8 +1,8 @@
 package com.qa.cv_manager.usercreationapi.persistence.domain;
 
-import com.qa.cv_manager.usercreationapi.validation.PasswordMatches;
-import com.qa.cv_manager.usercreationapi.validation.ValidEmail;
-import com.qa.cv_manager.usercreationapi.validation.ValidPassword;
+import com.qa.cv_manager.usercreationapi.util.validation.PasswordMatches;
+import com.qa.cv_manager.usercreationapi.util.validation.ValidEmail;
+import com.qa.cv_manager.usercreationapi.util.validation.ValidPassword;
 
 @PasswordMatches
 public class UserPOJO {

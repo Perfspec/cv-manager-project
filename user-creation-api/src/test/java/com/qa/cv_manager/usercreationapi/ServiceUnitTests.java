@@ -12,9 +12,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.qa.cv_manager.usercreationapi.constants.Constants;
 import com.qa.cv_manager.usercreationapi.persistence.repository.UserRepository;
 import com.qa.cv_manager.usercreationapi.service.UserServiceImpl;
+import com.qa.cv_manager.usercreationapi.util.constants.Constants;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceUnitTests {

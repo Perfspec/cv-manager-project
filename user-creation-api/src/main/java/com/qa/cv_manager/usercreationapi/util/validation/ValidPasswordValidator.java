@@ -1,4 +1,4 @@
-package com.qa.cv_manager.usercreationapi.validation;
+package com.qa.cv_manager.usercreationapi.util.validation;
 
 import java.util.Arrays;
 
