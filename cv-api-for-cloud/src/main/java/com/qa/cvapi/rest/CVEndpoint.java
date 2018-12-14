@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +16,6 @@ import com.qa.cvapi.persistence.domain.CV;
 import com.qa.cvapi.service.CVService;
 
 @RestController
-@RequestMapping(path = Constants.CV_PATH_EP)
 public class CVEndpoint {
 
 	@Autowired
@@ -38,7 +36,7 @@ public class CVEndpoint {
 	// Get CVs
 	@GetMapping(path = Constants.CV_GET_CVS_EP)
 	public @ResponseBody Iterable<CV> getCVs(@RequestBody Iterable<Integer> ids) {
-		return cvService.getAllCVs();
+		return cvService.getCVs(ids);
 	}
 
 	// Delete a CV
