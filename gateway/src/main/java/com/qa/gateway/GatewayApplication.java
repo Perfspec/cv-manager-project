@@ -9,6 +9,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import com.qa.gateway.constants.Constants;
+
 @SpringBootApplication
 @EnableZuulProxy
 @EnableEurekaClient
@@ -23,16 +25,13 @@ public class GatewayApplication {
 	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	    final CorsConfiguration config = new CorsConfiguration();
 	    config.setAllowCredentials(true);
-	    config.addAllowedOrigin("*");
-	    config.addAllowedHeader("*");
-	    config.addAllowedMethod("OPTIONS");
-	    config.addAllowedMethod("HEAD");
-	    config.addAllowedMethod("GET");
-	    config.addAllowedMethod("PUT");
-	    config.addAllowedMethod("POST");
-	    config.addAllowedMethod("DELETE");
-	    config.addAllowedMethod("PATCH");
-	    source.registerCorsConfiguration("/**", config);
+	    config.addAllowedOrigin(Constants.ALL);
+	    config.addAllowedHeader(Constants.ALL);
+	    config.addAllowedMethod(Constants.GET);
+	    config.addAllowedMethod(Constants.PUT);
+	    config.addAllowedMethod(Constants.POST);
+	    config.addAllowedMethod(Constants.DELETE);
+	    source.registerCorsConfiguration(Constants.ALL_DIRS, config);
 	    return new CorsFilter(source);
 	}
 }
