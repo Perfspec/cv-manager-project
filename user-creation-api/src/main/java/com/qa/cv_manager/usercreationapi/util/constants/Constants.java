@@ -1,5 +1,8 @@
 package com.qa.cv_manager.usercreationapi.util.constants;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -38,6 +41,7 @@ public class Constants {
 	public static final UserRole MOCK_USER_ROLE = new UserRole(MOCK_USERNAME, ADMIN);
 	public static final UserEmail MOCK_USER_EMAIL = new UserEmail(MOCK_USERNAME, MOCK_EMAIL);
 	public static final User MOCK_USER = new User(MOCK_USERNAME, MOCK_PASSWORD, true, MOCK_USER_ROLE, MOCK_USER_EMAIL);
+	public static final List<User> MOCK_LIST = Arrays.asList(MOCK_USER);
 	
 	public static final ResponseEntity<Object> RESPONSE_OK = new ResponseEntity<>(HttpStatus.OK);
 	public static final ResponseEntity<Object> RESPONSE_NOT_FOUND = new ResponseEntity<>(HttpStatus.NOT_FOUND);
