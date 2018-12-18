@@ -52,6 +52,8 @@ public class CVService implements ICVService {
 		cvInDB.get().setFlag(cv.getFlag());
 
 		cvRepo.save(cvInDB.get());
+		
+		jmsTemplate.convertAndSend(cvQueue, cvInDB);
 
 		return cvInDB.get();
 	}

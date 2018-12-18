@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.springframework.jms.core.JmsTemplate;
 
 import com.qa.cvapi.constants.Constants;
 import com.qa.cvapi.persistence.domain.CV;

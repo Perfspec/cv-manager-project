@@ -58,6 +58,8 @@ public class UserServiceImpl implements UserService {
 		storedUser.setUsername(username);
 		repo.save(storedUser);
 		
+		jmsTemplate.convertAndSend(userQueue, storedUser);
+		
 		return ResponseEntity.ok().build();
 	}
 
