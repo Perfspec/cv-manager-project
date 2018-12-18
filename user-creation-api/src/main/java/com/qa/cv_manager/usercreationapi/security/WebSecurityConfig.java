@@ -36,11 +36,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         	.and()
         	.authorizeRequests()
         	.antMatchers("/updatePassword/**", "/deleteUser/**").permitAll()
-        	.antMatchers("/enableAccount/**", "/disableAccount/**").hasAnyRole("ADMIN", "SUPER")
+        	.antMatchers("/enableAccount/**", "/disableAccount/**").hasRole("TRAINING_MANAGER")
         	.anyRequest().authenticated()
         	.and()
         	.authorizeRequests()
         	.antMatchers("/addUser/**").permitAll()
+        	.antMatchers("/getAll/**").permitAll()
         	.anyRequest().permitAll();
     }
 }

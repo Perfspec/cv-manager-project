@@ -1,5 +1,7 @@
 package com.qa.cv_manager.usercreationapi.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -90,4 +92,9 @@ public class UserServiceImpl implements UserService {
 	private boolean userExistsInDatabase(String username) {
 		return repo.findById(username).isPresent();
 	}
+	
+	public List<User> getAllUsers() {
+		return repo.findAll();
+	}
+	
 }

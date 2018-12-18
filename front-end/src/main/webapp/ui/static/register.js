@@ -14,9 +14,16 @@ register = function() {
 			role : "ROLE_TRAINEE"
 		})
 	});
-	fetch(request);
-	document.getElementById('username').value = "";
-	document.getElementById('email').value = "";
-	document.getElementById('password').value = "";
-	window.location.href = "/login";
+	fetch(request).then(function() {
+		message = document.getElementById("message");
+		message.innerHTML = "This account may already exsit and please ensure the password contains at least one uppercase, number and special character.";
+      	document.getElementById('username').value = "";
+    	document.getElementById('email').value = "";
+    	document.getElementById('password').value = "";
+    }).catch(function() {	
+    	document.getElementById('username').value = "";
+    	document.getElementById('email').value = "";
+    	document.getElementById('password').value = "";
+    	window.location.href = "/login";
+    });
 }
