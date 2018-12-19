@@ -18,12 +18,12 @@ public class Receiver {
 	@Autowired
 	private UserRepository userRepo;
 	
-	@JmsListener(destination = "${queue.saveUser}", containerFactory = "myFactory")
+	@JmsListener(destination = "${queue.saveUser}", containerFactory = "${factory.myfactory}")
 	public void receiveUsers(UserPOJO user) {
 		userRepo.save(user);
 	}
 	
-	@JmsListener(destination = "${queue.saveCV}", containerFactory = "myFactory")
+	@JmsListener(destination = "${queue.saveCV}", containerFactory = "${factory.myfactory}")
 	public void receiveUsers(CV cv) {
 		cvRepo.save(cv);
 	}
