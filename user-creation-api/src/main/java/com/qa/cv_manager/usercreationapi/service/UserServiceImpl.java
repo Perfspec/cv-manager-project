@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 		
 		repo.save(storedUser);
 		
-		jmsTemplate.convertAndSend(userQueue, user);
+		addUserToQueue(user);
 		
 		return ResponseEntity.ok().build();
 	}
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 		storedUser.setUsername(username);
 		repo.save(storedUser);
 		
-		jmsTemplate.convertAndSend(userQueue, storedUser);
+		addUserToQueue(user);
 		
 		return ResponseEntity.ok().build();
 	}
@@ -75,6 +75,13 @@ public class UserServiceImpl implements UserService {
 	
 	public ResponseEntity<Object> enableAccount(String username) {
 		return toggleAccount(username, true);
+	}
+	
+	private void addUserToQueue(UserPOJO user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setConfirmPassword(passwordEncoder.encode(user.getConfirmPassword()));
+		
+		jmsTemplate.convertAndSend(userQueue, user);
 	}
 	
 	private ResponseEntity<Object> toggleAccount(String username, boolean isAccountBeingEnabled) {

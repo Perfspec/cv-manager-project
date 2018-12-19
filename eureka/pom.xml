@@ -34,15 +34,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<<<<<<< HEAD:eureka/pom.xml
-=======
-		
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		 
->>>>>>> 36df73399e9a6b109aa43b3ae07a3fd1ac863c24:config/pom.xml
+
 	</dependencies>
 
 	<dependencyManagement>
