@@ -17,9 +17,10 @@
 
 				<h1 class="logo__text">Infosys & Malcolm</h1>
 			</div>
-
 			<div class="signup__container">
+				
 				<div class="container__child signup__form">
+				<p style="color: red" id="message"></p>
 					<form>
 						<div class="form-group">
 							<label for="username">Username</label> <input
@@ -45,7 +46,7 @@
 						</div>
 						<div class="m-t-lg">
 							<ul class="list-inline">
-								<li><input class="btn btn--form" onclick="register()"
+								<li><input id="register-button" class="btn btn--form" onclick="register()"
 									type="submit" value="Register" /></li>
 								<li><a class="signup__link" href="/login">I am already
 										a user</a></li>
