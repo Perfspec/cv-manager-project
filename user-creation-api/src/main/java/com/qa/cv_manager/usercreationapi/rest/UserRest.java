@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.cv_manager.usercreationapi.persistence.domain.User;
@@ -36,7 +37,7 @@ public class UserRest {
 	}
 	
 	@PutMapping("${path.updatePassword}")
-	@PreAuthorize("#username == authentication.principal.username || hasAnyRole('TRAINING_MANAGER', 'TRAINER')")
+	@PreAuthorize("#username == authentication.principal.username || hasRole('TRAINING_MANAGER')")
 	public ResponseEntity<Object> updatePassword(@RequestBody @Valid UserPOJO user, @PathVariable String username) {
 		return service.updatePassword(user, username);
 	}

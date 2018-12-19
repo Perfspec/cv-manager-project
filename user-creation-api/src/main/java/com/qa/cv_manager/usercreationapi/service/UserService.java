@@ -18,6 +18,6 @@ public interface UserService {
 	ResponseEntity<Object> disableAccount(String username);
 
 	ResponseEntity<Object> enableAccount(String username);
-	
+
 	List<User> getAllUsers();
 }
