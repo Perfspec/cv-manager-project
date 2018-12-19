@@ -1,8 +1,12 @@
 package com.qa.cv_manager.usercreationapi.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.qa.cv_manager.usercreationapi.persistence.domain.User;
@@ -20,15 +24,22 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private JmsTemplate jmsTemplate;
+	
+	@Value("${queue.userQueue}")
+	private String userQueue;
 
 	public ResponseEntity<Object> addUser(UserPOJO user) {
 		if(userExistsInDatabase(user.getUsername())) {
-			return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 		
 		User storedUser = createUserEntityFromPOJO(user);
 		
 		repo.save(storedUser);
+		
+		jmsTemplate.convertAndSend(userQueue, user);
 		
 		return ResponseEntity.ok().build();
 	}
@@ -42,6 +53,8 @@ public class UserServiceImpl implements UserService {
 		
 		storedUser.setUsername(username);
 		repo.save(storedUser);
+		
+		jmsTemplate.convertAndSend(userQueue, storedUser);
 		
 		return ResponseEntity.ok().build();
 	}
@@ -90,4 +103,9 @@ public class UserServiceImpl implements UserService {
 	private boolean userExistsInDatabase(String username) {
 		return repo.findById(username).isPresent();
 	}
+	
+	public List<User> getAllUsers() {
+		return repo.findAll();
+	}
+	
 }

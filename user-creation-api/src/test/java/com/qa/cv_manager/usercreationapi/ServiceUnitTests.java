@@ -10,11 +10,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.qa.cv_manager.usercreationapi.constants.Constants;
 import com.qa.cv_manager.usercreationapi.persistence.repository.UserRepository;
 import com.qa.cv_manager.usercreationapi.service.UserServiceImpl;
+import com.qa.cv_manager.usercreationapi.util.constants.Constants;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceUnitTests {
@@ -28,12 +29,22 @@ public class ServiceUnitTests {
 	@Mock
 	private PasswordEncoder passwordEncoder;
 	
+	@Mock
+	private JmsTemplate jmsTemplate;
+	
 	@Test
 	public void addUserTest() {
 		Mockito.when(repo.save(Mockito.any())).thenReturn(Constants.MOCK_USER);
 		Mockito.when(passwordEncoder.encode(Mockito.anyString())).thenReturn(Constants.MOCK_PASSWORD);
 		assertEquals(Constants.RESPONSE_OK, service.addUser(Constants.TEST_USER_POJO));
 		Mockito.verify(repo).save(Mockito.any());
+	}
+	
+	@Test
+	public void getAllUsersTest() {
+		Mockito.when(repo.findAll()).thenReturn(Constants.MOCK_LIST);
+		assertEquals(Constants.MOCK_LIST, service.getAllUsers());
+		Mockito.verify(repo).findAll();
 	}
 	
 	@Test

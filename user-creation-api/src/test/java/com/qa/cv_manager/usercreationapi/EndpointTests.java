@@ -9,9 +9,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.qa.cv_manager.usercreationapi.constants.Constants;
 import com.qa.cv_manager.usercreationapi.rest.UserRest;
 import com.qa.cv_manager.usercreationapi.service.UserServiceImpl;
+import com.qa.cv_manager.usercreationapi.util.constants.Constants;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EndpointTests {
@@ -22,6 +22,13 @@ public class EndpointTests {
 	@Mock
 	private UserServiceImpl service;
 
+	@Test
+	public void getAllUsersTest() {
+		Mockito.when(service.getAllUsers()).thenReturn(Constants.MOCK_LIST);
+		assertEquals(Constants.MOCK_LIST, rest.getAllUsers());
+		Mockito.verify(service).getAllUsers();
+	}
+	
 	@Test
 	public void addUserTest() {
 		Mockito.when(service.addUser(Constants.TEST_USER_POJO)).thenReturn(Constants.RESPONSE_OK);

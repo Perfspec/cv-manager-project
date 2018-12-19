@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.qa.cv_manager.usercreationapi.constants.Constants;
 import com.qa.cv_manager.usercreationapi.persistence.domain.UserPOJO;
+import com.qa.cv_manager.usercreationapi.util.constants.Constants;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

@@ -14,10 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.qa.cv_manager.usercreationapi.constants.Constants;
 import com.qa.cv_manager.usercreationapi.persistence.domain.User;
 import com.qa.cv_manager.usercreationapi.persistence.repository.UserRepository;
 import com.qa.cv_manager.usercreationapi.rest.UserRest;
+import com.qa.cv_manager.usercreationapi.util.constants.Constants;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,6 +34,7 @@ public class IntegrationTests {
 	
 	private static final User UPDATED_TEST_USER = new User(Constants.MOCK_USERNAME, Constants.UPDATED_PASSWORD, true, Constants.MOCK_USER_ROLE, Constants.MOCK_USER_EMAIL);
 	
+	
 	@Test
 	public void addUserTest() {
 		rest.addUser(Constants.TEST_USER_POJO);
@@ -42,28 +43,33 @@ public class IntegrationTests {
 	}
 	
 	@Test
+	public void bGetAllTest() {
+		assertEquals(Constants.MOCK_LIST.toString(), rest.getAllUsers().toString());
+	}
+	
+	@Test
 	@WithMockUser(roles = "ADMIN")
-	public void bUpdatePasswordTest() {
+	public void cUpdatePasswordTest() {
 		rest.updatePassword(Constants.UPDATED_TEST_USER_POJO, Constants.MOCK_USERNAME);
 		assertEquals(UPDATED_TEST_USER.toString(), repo.findById(Constants.MOCK_USERNAME).get().toString());
 		assertEquals(true, passwordEncoder.matches(Constants.UPDATED_PASSWORD, repo.findById(Constants.MOCK_USERNAME).get().getPassword()));
 	}
 	
 	@Test
-	public void cDisableAccountTest() {
+	public void dDisableAccountTest() {
 		assertEquals(Constants.RESPONSE_OK, rest.disableAccount(Constants.MOCK_USERNAME));
 		assertEquals(false, repo.findById(Constants.MOCK_USERNAME).get().isEnabled());
 	}
 	
 	@Test
-	public void dEnableAccountTest() {
+	public void eEnableAccountTest() {
 		assertEquals(Constants.RESPONSE_OK, rest.enableAccount(Constants.MOCK_USERNAME));
 		assertEquals(true, repo.findById(Constants.MOCK_USERNAME).get().isEnabled());
 	}
 
 	@Test
 	@WithMockUser(roles = "ADMIN")
-	public void eDeleteUserTest() {
+	public void fDeleteUserTest() {
 		rest.deleteUser(Constants.MOCK_USERNAME);
 		assertEquals(Optional.empty(), repo.findById(Constants.MOCK_USERNAME));
 	}
