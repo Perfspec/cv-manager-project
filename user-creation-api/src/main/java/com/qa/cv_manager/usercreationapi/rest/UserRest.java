@@ -57,4 +57,6 @@ public class UserRest {
 	public ResponseEntity<Object> enableAccount(@PathVariable String username) {
 		return service.enableAccount(username);
 	}
+	
+	
 }

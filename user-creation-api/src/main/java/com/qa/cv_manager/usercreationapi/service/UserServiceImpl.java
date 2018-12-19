@@ -29,10 +29,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Value("${queue.userQueue}")
 	private String userQueue;
-	
-	public List<User> getAllUsers() {
-		return repo.findAll();
-	}
 
 	public ResponseEntity<Object> addUser(UserPOJO user) {
 		if(userExistsInDatabase(user.getUsername())) {
@@ -107,4 +103,9 @@ public class UserServiceImpl implements UserService {
 	private boolean userExistsInDatabase(String username) {
 		return repo.findById(username).isPresent();
 	}
+	
+	public List<User> getAllUsers() {
+		return repo.findAll();
+	}
+	
 }
