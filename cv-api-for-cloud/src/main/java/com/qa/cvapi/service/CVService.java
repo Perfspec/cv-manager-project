@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import com.qa.cvapi.constants.Constants;
@@ -18,8 +20,15 @@ public class CVService implements ICVService {
 
 	@Autowired
 	private CVRepository cvRepo;
+	
+	@Autowired
+	private JmsTemplate jmsTemplate;
+	
+	@Value("${queue.saveCV}")
+	private String cvQueue;
 
 	public CV addCV(CV cv) {
+		jmsTemplate.convertAndSend(cvQueue, cv);
 		return cvRepo.save(cv);
 	}
 
@@ -43,6 +52,8 @@ public class CVService implements ICVService {
 		cvInDB.get().setFlag(cv.getFlag());
 
 		cvRepo.save(cvInDB.get());
+		
+		jmsTemplate.convertAndSend(cvQueue, cvInDB);
 
 		return cvInDB.get();
 	}

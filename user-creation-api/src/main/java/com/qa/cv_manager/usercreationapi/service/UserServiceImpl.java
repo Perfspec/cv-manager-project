@@ -1,8 +1,12 @@
 package com.qa.cv_manager.usercreationapi.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.qa.cv_manager.usercreationapi.persistence.domain.User;
@@ -20,6 +24,15 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private JmsTemplate jmsTemplate;
+	
+	@Value("${queue.userQueue}")
+	private String userQueue;
+	
+	public List<User> getAllUsers() {
+		return repo.findAll();
+	}
 
 	public ResponseEntity<Object> addUser(UserPOJO user) {
 		if(userExistsInDatabase(user.getUsername())) {
@@ -29,6 +42,8 @@ public class UserServiceImpl implements UserService {
 		User storedUser = createUserEntityFromPOJO(user);
 		
 		repo.save(storedUser);
+		
+		jmsTemplate.convertAndSend(userQueue, user);
 		
 		return ResponseEntity.ok().build();
 	}
@@ -42,6 +57,8 @@ public class UserServiceImpl implements UserService {
 		
 		storedUser.setUsername(username);
 		repo.save(storedUser);
+		
+		jmsTemplate.convertAndSend(userQueue, storedUser);
 		
 		return ResponseEntity.ok().build();
 	}
