@@ -1,0 +1,2 @@
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie
