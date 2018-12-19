@@ -23,6 +23,13 @@ public class EndpointTests {
 	private UserServiceImpl service;
 
 	@Test
+	public void getAllUsersTest() {
+		Mockito.when(service.getAllUsers()).thenReturn(Constants.MOCK_LIST);
+		assertEquals(Constants.MOCK_LIST, rest.getAllUsers());
+		Mockito.verify(service).getAllUsers();
+	}
+	
+	@Test
 	public void addUserTest() {
 		Mockito.when(service.addUser(Constants.TEST_USER_POJO)).thenReturn(Constants.RESPONSE_OK);
 		assertEquals(Constants.RESPONSE_OK, rest.addUser(Constants.TEST_USER_POJO));
