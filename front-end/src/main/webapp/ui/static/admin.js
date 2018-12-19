@@ -37,16 +37,13 @@ function listAllUsers() {
 	populateTable(getHttp('http://localhost:8080/user-creation-api/getAll'));
 }
 
-function getHttp(url) {
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("GET", url, false);
-	xmlHttp.send(null);
-	return xmlHttp.responseText;
-}
+ function getHttp(url) {
+ var xmlHttp = new XMLHttpRequest();
+ xmlHttp.open("GET", url, false);
+ xmlHttp.send(null);
+ return xmlHttp.responseText;
+ }
 
-function fetchHttp(url) {
-
-}
 
 String.prototype.capitalize = function() {
 	return this.charAt(0).toUpperCase() + this.slice(1);
@@ -74,11 +71,16 @@ var tableToExcel = (function() {
 
 function delete_row(no) {
 	var name = document.getElementById("name_row" + no);
+	var auth = btoa('admin','Password1');
+	var url = 'http://localhost:8080/user-creation-api/deleteUser/'+ name.innerHTML;
 
-	var x = new XMLHttpRequest();
-	var url = "http://localhost:8080/user-creation-api/deleteUser/" + name.innerHTML;
-	x.open("DELETE", url);
-	x.send();
+	xml = new XMLHttpRequest();
+	xml.open('DELETE',url)
+	xml.setRequestHeader('Authorization', auth);
+	
+	xml.send();
 	document.getElementById("row" + no + "").outerHTML = "";
-
 }
+
+
+

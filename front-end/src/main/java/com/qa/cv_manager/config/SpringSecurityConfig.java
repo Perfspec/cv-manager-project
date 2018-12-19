@@ -69,4 +69,5 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers(Constants.CSS_FILES);
 		web.ignoring().antMatchers(Constants.JS_FILES);
 	}
+
 }

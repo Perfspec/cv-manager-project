@@ -23,9 +23,13 @@
 
 <body onload="listAllUsers()">
 
+	
+
 	<security:authorize access="hasRole('ROLE_TRAINING_MANAGER')">
-	   <c:set var="username" scope ="session"><security:authentication property="principal.username" /></c:set>
-        <c:set var="role" scope ="session"><security:authentication property="principal.authorities" /></c:set>
+	<security:authorize access="isAuthenticated()">
+    authenticated as <security:authentication
+			property="principal.username" />
+	</security:authorize>
 		<div class="container">
 			<div class="table-wrapper">
 				<div class="table-title">
@@ -36,11 +40,13 @@
 							</h2>
 						</div>
 						<div class="col-sm-6">
-							<a  type="button" class="btn btn-dark btn-md" style= "margin-right: -20%" href="<c:url value="/perform_logout" />"> <span class="glyphicon glyphicon-log-out"></span>&nbsp Logout </a>
-							
-							<a href="#" onclick=location.reload() class="btn btn-primary" style="margin-right:20%"><i
-								class="material-icons">&#xE863;</i> <span>Refresh List</span></a> <a
-								href="#"
+							<a type="button" class="btn btn-dark btn-md"
+								style="margin-right: -20%"
+								href="<c:url value="/perform_logout" />"> <span
+								class="glyphicon glyphicon-log-out"></span> &nbsp Logout
+							</a> <a href="#" onclick=location.reload() class="btn btn-primary"
+								style="margin-right: 20%"><i class="material-icons">&#xE863;</i>
+								<span>Refresh List</span></a> <a href="#"
 								onclick="tableToExcel('data_table', 'W3C Example Table')"
 								class="btn btn-info"><i class="material-icons">&#xE24D;</i>
 								<span>Export to Excel</span></a>
@@ -67,22 +73,10 @@
 					</thead>
 
 				</table>
-				<div class="clearfix">
-					<div class="hint-text">
-						Showing <b>5</b> out of <b>25</b> entries
-					</div>
-					<ul class="pagination">
-						<li class="page-item disabled"><a href="#">Previous</a></li>
-						<li class="page-item"><a href="#" class="page-link">1</a></li>
-						<li class="page-item"><a href="#" class="page-link">2</a></li>
-						<li class="page-item active"><a href="#" class="page-link">3</a></li>
-						<li class="page-item"><a href="#" class="page-link">4</a></li>
-						<li class="page-item"><a href="#" class="page-link">5</a></li>
-						<li class="page-item"><a href="#" class="page-link">Next</a></li>
-					</ul>
-				</div>
 			</div>
 		</div>
+
+
 	</security:authorize>
 
 

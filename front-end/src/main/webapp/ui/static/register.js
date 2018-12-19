@@ -14,16 +14,19 @@ register = function() {
 			role : "ROLE_TRAINEE"
 		})
 	});
-	fetch(request).then(function() {
-		message = document.getElementById("message");
-		message.innerHTML = "This account may already exsit and please ensure the password contains at least one uppercase, number and special character.";
-      	document.getElementById('username').value = "";
-    	document.getElementById('email').value = "";
-    	document.getElementById('password').value = "";
-    }).catch(function() {	
-    	document.getElementById('username').value = "";
-    	document.getElementById('email').value = "";
-    	document.getElementById('password').value = "";
-    	window.location.href = "/login";
-    });
+	fetch(request).then(function(response) {
+		if (response.status === 409) {
+			 window.alert("User already exsists");
+		} else if (response.status === 200) {
+			response.json().then(function(object) {
+				window.alert("Account Succesfully Created");
+			})
+		} else if (response.status === 400) {
+			response.json().then(function(object) {
+				 message = document.getElementById("message");
+				 message.innerHTML = "Please ensure the password is atleast 8 letters and contains at least three the following: uppercase, lowercase, number and special character.";
+			})
+		}
+	
+	})
 }

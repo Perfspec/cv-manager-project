@@ -284,3 +284,7 @@ input:checked + .slider .off
 
 .slider.round:before {
   border-radius: 50%;}
+  
+.container {
+	transition: all 300ms ease;
+}

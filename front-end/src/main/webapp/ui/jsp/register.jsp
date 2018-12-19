@@ -46,7 +46,7 @@
 						</div>
 						<div class="m-t-lg">
 							<ul class="list-inline">
-								<li><input class="btn btn--form" onclick="register()"
+								<li><input id="register-button" class="btn btn--form" onclick="register()"
 									type="submit" value="Register" /></li>
 								<li><a class="signup__link" href="/login">I am already
 										a user</a></li>
