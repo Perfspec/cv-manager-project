@@ -4,7 +4,7 @@ pipeline {
         stage('--run-docker-compose--') {
             steps {
             sh "cd /var/lib/jenkins/workspace/cv-manager-project_qa/"
-            sh "sudo docker-compose up --build -d"
+            sh "docker-compose up --build -d"
             }
         }
         stage('--run-eureka--') {
