@@ -8,6 +8,8 @@ public class Constants {
 	public static final String CV_GET_CV_EP = "/getCV/{id}";
 	public static final String CV_DELETE_EP = "/deleteCV/{id}";
 	public static final String CV_UPDATE_EP = "/updateCV/{id}";
+	public static final String CV_GET_USERNAME = "/getByUsername/{username}";
+
 
 	// Admin Endpoints
 	public static final String ADMIN_PATH = "/admin";
@@ -45,5 +47,4 @@ public class Constants {
 
 	// Test strings
 	public static final String TEST_PATH = "Test Path";
-
 }

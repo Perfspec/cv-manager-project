@@ -73,4 +73,10 @@ public class CVEndpoint {
 		cvService.updateFlag(id, flag);
 		return Constants.CV_FLAGGED;
 	}	
+		
+	// Get CV by Username
+	@GetMapping(path = Constants.CV_GET_USERNAME)
+	public @ResponseBody Iterable<CV> getCVByUsername(@PathVariable String username) {
+		return cvService.getByUsername(username);
+	}
 }

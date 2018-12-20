@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -101,5 +103,9 @@ public class CVService implements ICVService {
 
 		return flaggedList;
 	}
-
+	
+	// Get All By Username
+	public Iterable<CV> getByUsername(String username) {
+		return cvRepo.getByUsername(username);
+	}
 }
