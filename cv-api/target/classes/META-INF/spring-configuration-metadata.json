@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "storage",
+      "type": "com.ACO.storage.StorageProperties",
+      "sourceType": "com.ACO.storage.StorageProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "storage.location",
+      "type": "java.lang.String",
+      "sourceType": "com.ACO.storage.StorageProperties"
+    }
+  ],
+  "hints": []
+}
