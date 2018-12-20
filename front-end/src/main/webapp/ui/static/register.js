@@ -1,5 +1,5 @@
 register = function() {
-	const url = 'http://localhost:8080/user-creation-api/addUser';
+	const url = 'http://localhost:9999/user-creation-api/addUser';
 	var request = new Request(url, {
 		method : 'POST',
 		headers : {
