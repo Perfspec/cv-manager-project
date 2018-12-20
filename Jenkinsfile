@@ -4,6 +4,7 @@ pipeline {
         stage('--run-eureka--') {
             steps {
             sh "cd /var/lib/jenkins/workspace/cv-manager-project_qa/eureka/"
+						sh "cp deploy.bash /var/lib/jenkins/workspace/cv-manager-project_qa@tmp/"
             sh "./deploy.bash"
             }
         }
