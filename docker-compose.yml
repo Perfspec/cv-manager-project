@@ -65,6 +65,6 @@ services:
       - artifact_id=consumer
       - version=0.0.1-SNAPSHOT
     depends_on:
-    - activmq
+    - activemq
     - mongodb
     - front-end
