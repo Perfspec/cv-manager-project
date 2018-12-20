@@ -1,21 +1,5 @@
 version: '3'
 services:
-  activemq:
-    container_name: activemq
-    image: activemq
-  mongodb:
-    container_name: mongodb
-    image: mongo
-  mysql:
-    container_name: mysql
-    image: mysql
-  consumer:
-    container_name: consumer
-    build:
-      context: consumer
-      args:
-      - artifact_id=consumer
-      - version=0.0.1-SNAPSHOT
   eureka:
     container_name: eureka
     build:
@@ -23,25 +7,24 @@ services:
       args:
       - artifact_id=eureka
       - version=0.0.1-SNAPSHOT
-  front-end:
-    container_name: front-end
-    build:
-      context: front-end
-      args:
-      - artifact_id=front-end
-      - version=0.0.1-SNAPSHOT
-    ports:
-      - "80:3000"
   zuul:
     container_name: zuul
     build:
+      depends_on:
+      - eureka
       context: zuul
       args:
       - artifact_id=zuul
       - version=0.0.1-SNAPSHOT
+  mysql:
+    container_name: mysql
+    image: mysql
   user-creation-api:
     container_name: user-creation-api
     build:
+      depends_on:
+      - zuul
+      - mysql
       context: user-creation-api
       args:
       - artifact_id=user-creation-api
@@ -49,10 +32,39 @@ services:
   cv-api-for-cloud:
     container_name: cv-api-for-cloud
     build:
-    depends_on:
-    - eureka
-    - zuul
+      depends_on:
+      - zuul
+      - mysql
       context: cv-api-for-cloud
       args:
       - artifact_id=cv-api
+      - version=0.0.1-SNAPSHOT
+  front-end:
+    container_name: front-end
+    build:
+      depends_on:
+      - cv-api-for-cloud
+      - user-creation-api
+      context: front-end
+      args:
+      - artifact_id=front-end
+      - version=0.0.1-SNAPSHOT
+    ports:
+      - "80:3000"
+  activemq:
+    container_name: activemq
+    image: activemq
+  mongodb:
+    container_name: mongodb
+    image: mongo
+  consumer:
+    container_name: consumer
+    build:
+      depends_on:
+      - activmq
+      - mongodb
+      - front-end
+      context: consumer
+      args:
+      - artifact_id=consumer
       - version=0.0.1-SNAPSHOT
